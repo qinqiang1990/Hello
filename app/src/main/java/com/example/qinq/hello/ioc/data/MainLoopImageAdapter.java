@@ -20,6 +20,13 @@ public class MainLoopImageAdapter extends PagerAdapter {
     }
 
     @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+
+        container.removeView((View)object);
+
+    }
+
+    @Override
     public int getCount() {
         return this.resData.length;
     }
@@ -32,7 +39,7 @@ public class MainLoopImageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView = new ImageView(this.context);
-        imageView.setScaleType(ImageView.ScaleType.CENTER);
+        imageView.setScaleType(ImageView.ScaleType.FIT_START);
         imageView.setAdjustViewBounds(true);
         imageView.setImageResource(this.resData[position]);
         container.addView(imageView);

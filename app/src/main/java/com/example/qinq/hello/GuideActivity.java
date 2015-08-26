@@ -23,7 +23,7 @@ public class GuideActivity extends BaseActivity {
     @Override
     protected void initialize() {
 
-        MainLoopImageAdapter adapter = new MainLoopImageAdapter(this, new int[]{});
+        MainLoopImageAdapter adapter = new MainLoopImageAdapter(this, new int[]{R.mipmap.guide1, R.mipmap.guide2, R.mipmap.guide3, R.mipmap.guide4});
         viewPager.setAdapter(adapter);
     }
 
@@ -45,7 +45,11 @@ public class GuideActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-
+                if (position == 3) {
+                    experienceBtn.setVisibility(View.VISIBLE);
+                } else {
+                    experienceBtn.setVisibility(View.GONE);
+                }
             }
 
             @Override

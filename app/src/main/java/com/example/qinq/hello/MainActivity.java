@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
+import com.example.qinq.hello.ioc.BaseActivity;
 import com.example.qinq.hello.ioc.ViewInjectUtils;
 import com.example.qinq.hello.ioc.view.ContentView;
 import com.example.qinq.hello.ui.tag.cloud.Tag;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 
     private TagCloud createTags() {
         TagCloud tagCloud = new TagCloud();
@@ -29,9 +30,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-        // setContentView(R.layout.activity_main);
-        //ViewInjectUtils.inject(this);
+        ViewInjectUtils.inject(this);
+        /*
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 
         TagCloud tagCloud = createTags();
 
@@ -40,28 +41,16 @@ public class MainActivity extends Activity {
         mTagCloudView.requestFocus();
         mTagCloudView.setFocusableInTouchMode(true);
 
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);*/
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected void initialize() {
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected void addListener() {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
