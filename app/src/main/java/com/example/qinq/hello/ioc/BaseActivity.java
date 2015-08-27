@@ -9,7 +9,6 @@ public abstract class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewInjectUtils.inject(this);
-
         initialize();
         addListener();
     }
