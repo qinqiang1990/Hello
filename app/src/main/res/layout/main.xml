@@ -2,7 +2,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#FFFFFF">
 
+    <fragment
+        android:id="@+id/main_nav"
+        class="com.example.qinq.hello.fragment.NavigateBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        tools:layout="@layout/navigate"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/main_tabHomeBtn"
+            style="@style/main_tag_btn"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/tab_home_pre"
+            android:text="首页" />
+
+        <Button
+            android:id="@+id/main_tabShopBtn"
+            style="@style/main_tag_btn"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/tab_shop_nor"
+            android:text="餐店" />
+
+        <Button
+            android:id="@+id/main_tabPreferentialBtn"
+            style="@style/main_tag_btn"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/tab_preferential_nor"
+            android:text="优惠" />
+
+        <Button
+            android:id="@+id/main_tabOrderBtn"
+            style="@style/main_tag_btn"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/tab_order_nor"
+            android:text="订单" />
+
+        <Button
+            android:id="@+id/main_tabPersonalBtn"
+            style="@style/main_tag_btn"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/tab_preferential_nor"
+            android:text="我的" />
+    </LinearLayout>
 
 </RelativeLayout>
