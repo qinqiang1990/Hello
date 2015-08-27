@@ -4,11 +4,7 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.qinq.hello.MainActivity;
-
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by Yasenia on 2015/8/24.

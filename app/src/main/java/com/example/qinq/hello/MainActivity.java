@@ -1,56 +1,61 @@
 package com.example.qinq.hello;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.qinq.hello.ioc.BaseActivity;
-import com.example.qinq.hello.ioc.ViewInjectUtils;
+import com.example.qinq.hello.ioc.data.MainLoopImageAdapter;
 import com.example.qinq.hello.ioc.view.ContentView;
-import com.example.qinq.hello.ui.tag.cloud.Tag;
-import com.example.qinq.hello.ui.tag.cloud.TagCloud;
-import com.example.qinq.hello.ui.tag.cloud.TagCloudView;
+import com.example.qinq.hello.ioc.view.ViewInject;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@ContentView(R.layout.activity_main)
+@ContentView(R.layout.main)
 public class MainActivity extends BaseActivity {
 
-    private TagCloud createTags() {
-        TagCloud tagCloud = new TagCloud();
-        tagCloud.add(new Tag(600, 700, "http://www.google.com"));
-        tagCloud.add(new Tag(300, 600, "www.yahoo.com"));
-        tagCloud.add(new Tag(200, 800, "www.cnn.com"));
-        return tagCloud;
-    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ViewInjectUtils.inject(this);
-        /*
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+    @ViewInject(R.id.guide_experienceBtn)
+    Button experienceBtn;
 
-        TagCloud tagCloud = createTags();
+    @ViewInject(R.id.guide_viewPager)
+    ViewPager viewPager;
 
-        TagCloudView mTagCloudView = new TagCloudView(this, tagCloud);
-        setContentView(mTagCloudView);
-        mTagCloudView.requestFocus();
-        mTagCloudView.setFocusableInTouchMode(true);
-
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);*/
-    }
 
     @Override
     protected void initialize() {
 
+        MainLoopImageAdapter adapter = new MainLoopImageAdapter(this, new int[]{R.mipmap.guide1, R.mipmap.guide2, R.mipmap.guide3, R.mipmap.guide4});
+        viewPager.setAdapter(adapter);
     }
 
     @Override
     protected void addListener() {
 
+        experienceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 3) {
+                    experienceBtn.setVisibility(View.VISIBLE);
+                } else {
+                    experienceBtn.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
