@@ -13,6 +13,7 @@ public abstract class BaseActivity extends Activity {
         addListener();
     }
 
+
     /**
      * ≥ı ºªØ
      */
