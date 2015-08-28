@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
  * Created by qinqiang on 2015/8/27.
  */
 public class BaseFragment extends Fragment {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

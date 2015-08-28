@@ -5,15 +5,15 @@
     android:background="#FFFFFF">
 
     <fragment
-        android:id="@+id/main_nav"
+        android:id="@+id/main_navBar"
         class="com.example.qinq.hello.fragment.NavigateBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        tools:layout="@layout/navigate"/>
-
+        tools:layout="@layout/navigate" />
 
     <LinearLayout
+        android:id="@+id/main_tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
@@ -53,5 +53,50 @@
             android:drawableTop="@mipmap/tab_preferential_nor"
             android:text="我的" />
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_tabLayout"
+        android:layout_below="@id/main_navBar">
+
+        <fragment
+            android:id="@+id/main_preferentialFragment"
+            android:name="com.example.qinq.hello.fragment.ShopFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_shop" />
+
+        <fragment
+            android:id="@+id/main_orderFragment"
+            android:name="com.example.qinq.hello.fragment.ShopFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_shop" />
+
+        <fragment
+            android:id="@+id/main_personalFragment"
+            class="com.example.qinq.hello.fragment.IndexFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_index" />
+
+        <fragment
+            android:id="@+id/main_shopFragment"
+            android:name="com.example.qinq.hello.fragment.ShopFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_shop" />
+
+        <fragment
+            android:id="@+id/main_indexFragment"
+            class="com.example.qinq.hello.fragment.IndexFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_index" />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

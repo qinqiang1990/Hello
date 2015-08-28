@@ -68,8 +68,7 @@ public class ViewInjectUtils {
                 if (viewId != ViewInject.DEFAULT_ID) {
                     // ≥ı ºªØView
                     try {
-                        Method method = clazz.getMethod(METHOD_FIND_VIEW_BY_ID,
-                                int.class);
+                        Method method = clazz.getMethod(METHOD_FIND_VIEW_BY_ID,int.class);
                         Object resView = method.invoke(activity, viewId);
                         field.setAccessible(true);
                         field.set(activity, resView);
@@ -78,7 +77,7 @@ public class ViewInjectUtils {
                     }
 
                 }
-                String methodname = viewInjectAnnotation.click();
+        /*        String methodname = viewInjectAnnotation.click();
                 if (!methodname.equals(ViewInject.DEFAULT_METHOD)) {
                     try {
                         final Object obj = field.get(activity);
@@ -103,7 +102,7 @@ public class ViewInjectUtils {
                     }
 
                 }
-
+*/
             }
 
         }

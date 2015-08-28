@@ -1,11 +1,11 @@
-package com.example.qinq.hello.ioc;
+package com.example.qinq.hello.activity;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
-public abstract class BaseActivity extends FragmentActivity {
+import com.example.qinq.hello.ioc.ViewInjectUtils;
+
+public abstract class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,6 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /**
-     * ≥ı ºªØ
      */
     protected abstract void initialize();
 
