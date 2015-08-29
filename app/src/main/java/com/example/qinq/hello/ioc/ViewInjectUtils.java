@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.qinq.hello.ioc.view.ClickMethod;
 import com.example.qinq.hello.ioc.view.ContentView;
 import com.example.qinq.hello.ioc.view.ViewInject;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 /**
  * Created by qinqiang on 2015/8/24.
  */
@@ -24,7 +26,7 @@ public class ViewInjectUtils {
 
         injectContentView(activity);
         injectViews(activity);
-
+        injectClick(activity);
     }
 
     /**
@@ -34,10 +36,9 @@ public class ViewInjectUtils {
      */
     private static void injectContentView(Activity activity) {
         Class<? extends Activity> clazz = activity.getClass();
-        // 查询类上是否存在ContentView注解
+
         ContentView contentView = clazz.getAnnotation(ContentView.class);
-        if (contentView != null)// 存在
-        {
+        if (contentView != null) {
             int contentViewLayoutId = contentView.value();
             try {
                 Method method = clazz.getMethod(METHOD_SET_CONTENTVIEW,
@@ -55,58 +56,76 @@ public class ViewInjectUtils {
      *
      * @param activity
      */
-    private static void injectViews(final Activity activity) {
+    private static void injectViews(Activity activity) {
         final Class<? extends Activity> clazz = activity.getClass();
         Field[] fields = clazz.getDeclaredFields();
-        // 遍历所有成员变量
+
         for (Field field : fields) {
 
-            ViewInject viewInjectAnnotation = field
-                    .getAnnotation(ViewInject.class);
+            ViewInject viewInjectAnnotation = field.getAnnotation(ViewInject.class);
             if (viewInjectAnnotation != null) {
-                int viewId = viewInjectAnnotation.value();
-                if (viewId != ViewInject.DEFAULT_ID) {
-                    // 初始化View
+                int ViewId = viewInjectAnnotation.value();
+                if (ViewId != ViewInject.DEFAULT_ID) {
                     try {
-                        Method method = clazz.getMethod(METHOD_FIND_VIEW_BY_ID,int.class);
-                        Object resView = method.invoke(activity, viewId);
+                        Method method = clazz.getMethod(METHOD_FIND_VIEW_BY_ID, int.class);
+                        Object resView = method.invoke(activity, ViewId);
                         field.setAccessible(true);
                         field.set(activity, resView);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
-        /*        String methodname = viewInjectAnnotation.click();
-                if (!methodname.equals(ViewInject.DEFAULT_METHOD)) {
-                    try {
-                        final Object obj = field.get(activity);
-                        final Method method = clazz.getMethod(methodname, View.class);
-                        if (obj instanceof View) {
-                            ((View) obj).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    try {
-                                        method.invoke(activity, v);
-                                    } catch (IllegalAccessException e) {
-                                        e.printStackTrace();
-                                    } catch (InvocationTargetException e) {
-                                        e.printStackTrace();
-                                    }
-                                    Toast.makeText(v.getContext(),"Hello",Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
-                }
-*/
             }
 
         }
 
     }
+
+    /**
+     * 注入click事件
+     *
+     * @param activity
+     */
+    private static void injectClick(final Activity activity) {
+        Class<? extends Activity> clazz = activity.getClass();
+        Method[] methods = clazz.getDeclaredMethods();
+
+        for (Method temp : methods) {
+            final Method method = temp;
+            ClickMethod clickMethodAnnotation = method.getAnnotation(ClickMethod.class);
+            if (clickMethodAnnotation != null) {
+                int[] ViewIds = clickMethodAnnotation.id();
+                for (int i = 0; i < ViewIds.length; i++) {
+
+                    View view = activity.findViewById(ViewIds[i]);
+
+                    view.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+
+                            try {
+                                method.invoke(activity, v);
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            } catch (InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                }
+
+            }
+
+        }
+
+    }
+
 }
+
+
 

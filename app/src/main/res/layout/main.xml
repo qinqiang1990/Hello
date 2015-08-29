@@ -62,25 +62,25 @@
         android:layout_below="@id/main_navBar">
 
         <fragment
-            android:id="@+id/main_preferentialFragment"
-            android:name="com.example.qinq.hello.fragment.ShopFragment"
+            android:id="@+id/main_personalFragment"
+            android:name="com.example.qinq.hello.fragment.PersonalFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_shop" />
+            tools:layout="@layout/fragment_personal" />
 
         <fragment
             android:id="@+id/main_orderFragment"
-            android:name="com.example.qinq.hello.fragment.ShopFragment"
+            android:name="com.example.qinq.hello.fragment.OrderFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_shop" />
+            tools:layout="@layout/fragment_order" />
 
         <fragment
-            android:id="@+id/main_personalFragment"
-            class="com.example.qinq.hello.fragment.IndexFragment"
+            android:id="@+id/main_preferentialFragment"
+            class="com.example.qinq.hello.fragment.PreferentialFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_index" />
+            tools:layout="@layout/fragment_preferential" />
 
         <fragment
             android:id="@+id/main_shopFragment"

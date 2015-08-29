@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.example.qinq.hello.ioc.ViewInjectUtils;
 
@@ -36,11 +37,10 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         if (from == to) {
             return;
         } else {
-            FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_out_right, android.R.anim.slide_in_left);
+            FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             transaction.hide(from).show(to).commit();
         }
-        from = to;
-
 
     }
 }

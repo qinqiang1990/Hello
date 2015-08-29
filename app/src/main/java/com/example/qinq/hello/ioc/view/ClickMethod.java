@@ -8,17 +8,10 @@ import java.lang.annotation.Target;
 /**
  * Created by qinqiang on 2015/8/24.
  */
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ViewInject {
+@Target(value = {ElementType.METHOD})
+@Retention(value = RetentionPolicy.RUNTIME)
+public @interface ClickMethod {
 
-
-    /**
-     * Ä¬ÈÏ¿Ø¼þID
-     */
-    int DEFAULT_ID = -1;
-
-
-    int value() default DEFAULT_ID;
+    int[] id();
 
 }

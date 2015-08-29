@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.qinq.hello.activity.BaseFragmentActivity;
 import com.example.qinq.hello.fragment.IndexFragment;
@@ -12,6 +11,7 @@ import com.example.qinq.hello.fragment.OrderFragment;
 import com.example.qinq.hello.fragment.PersonalFragment;
 import com.example.qinq.hello.fragment.PreferentialFragment;
 import com.example.qinq.hello.fragment.ShopFragment;
+import com.example.qinq.hello.ioc.view.ClickMethod;
 import com.example.qinq.hello.ioc.view.ContentView;
 import com.example.qinq.hello.ioc.view.ViewInject;
 
@@ -19,19 +19,19 @@ import com.example.qinq.hello.ioc.view.ViewInject;
 public class MainActivity extends BaseFragmentActivity {
 
 
-    @ViewInject(value = R.id.main_tabHomeBtn, click = "OnClick")
+    @ViewInject(value = R.id.main_tabHomeBtn)
     Button tabHomeBtn;
 
-    @ViewInject(value = R.id.main_tabShopBtn, click = "OnClick")
+    @ViewInject(value = R.id.main_tabShopBtn)
     Button tabShopBtn;
 
-    @ViewInject(value = R.id.main_tabPreferentialBtn, click = "OnClick")
+    @ViewInject(value = R.id.main_tabPreferentialBtn)
     Button tabPreferentialBtn;
 
-    @ViewInject(value = R.id.main_tabOrderBtn, click = "OnClick")
+    @ViewInject(value = R.id.main_tabOrderBtn)
     Button tabOrderBtn;
 
-    @ViewInject(value = R.id.main_tabPersonalBtn, click = "OnClick")
+    @ViewInject(value = R.id.main_tabPersonalBtn)
     Button tabPersonalBtn;
 
     IndexFragment indexFragment;
@@ -46,39 +46,39 @@ public class MainActivity extends BaseFragmentActivity {
 
     Fragment curfragment;
 
-    View.OnClickListener click = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.main_tabHomeBtn:
-                    if(curfragment==indexFragment)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        switchFragment(curfragment,indexFragment);
-                    }
-                    curfragment = indexFragment;
-                    break;
-                case R.id.main_tabShopBtn:
-                    curfragment = shopFragment;
+    @ClickMethod(id = {R.id.main_tabHomeBtn, R.id.main_tabShopBtn, R.id.main_tabPreferentialBtn, R.id.main_tabOrderBtn, R.id.main_tabPersonalBtn})
+    public void click(View v) {
 
-                    break;
-                case R.id.main_tabPreferentialBtn:
-                    curfragment = preferentialFragment;
-                    break;
-                case R.id.main_tabOrderBtn:
-                    curfragment = orderFragment;
-                    break;
-                case R.id.main_tabPersonalBtn:
-                    curfragment = personalFragment;
-                    break;
+        Fragment from = curfragment;
+        Fragment to = null;
+        switch (v.getId()) {
+            case R.id.main_tabHomeBtn:
+                to = curfragment = indexFragment;
 
-            }
+                break;
+            case R.id.main_tabShopBtn:
+                to = curfragment = shopFragment;
+
+                break;
+            case R.id.main_tabPreferentialBtn:
+                to = curfragment = preferentialFragment;
+
+                break;
+            case R.id.main_tabOrderBtn:
+                to = curfragment = orderFragment;
+
+                break;
+            case R.id.main_tabPersonalBtn:
+                to = curfragment = personalFragment;
+
+                break;
 
         }
-    };
+
+        switchFragment(from, to);
+
+    }
+
 
     @Override
     protected void initialize() {
@@ -92,13 +92,13 @@ public class MainActivity extends BaseFragmentActivity {
 
     @Override
     protected void addListener() {
-        tabHomeBtn.setOnClickListener(click);
-        tabShopBtn.setOnClickListener(click);
-        tabPreferentialBtn.setOnClickListener(click);
-        tabOrderBtn.setOnClickListener(click);
-        tabPersonalBtn.setOnClickListener(click);
-
-
+        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction().hide(shopFragment);
+        transaction.hide(shopFragment);
+        transaction.hide(preferentialFragment);
+        transaction.hide(orderFragment);
+        transaction.hide(personalFragment);
+        transaction.commit();
+        curfragment = indexFragment;
     }
 
 
