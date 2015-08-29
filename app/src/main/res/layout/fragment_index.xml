@@ -26,6 +26,8 @@
                     android:text="推荐餐店 "
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/textSize" />
+
+
             </LinearLayout>
 
             <LinearLayout
