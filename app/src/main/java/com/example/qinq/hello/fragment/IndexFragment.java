@@ -144,6 +144,7 @@ public class IndexFragment extends BaseFragment {
             vGapLLP.bottomMargin = 3;
 
 
+
             View gapView = new View(getHostActivity());
             gapView.setId(type.hashCode()+1);
             gapView.setBackgroundColor(Color.parseColor("#dddedf"));
