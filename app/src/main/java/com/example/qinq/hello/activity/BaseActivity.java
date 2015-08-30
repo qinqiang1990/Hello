@@ -16,6 +16,7 @@ public abstract class BaseActivity extends Activity {
     }
 
     /**
+     * ≥ı ºªØ
      */
     protected abstract void initialize();
 
