@@ -7,16 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.qinq.hello.R;
+import com.example.qinq.hello.ioc.view.ContentView;
 
 /**
  * Created by qinqiang on 2015/8/27.
  */
+
+@ContentView()
 public class IndexFragment extends BaseFragment {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_index, container, false);
-    }
+
+
     /**
      * ¼ÓÔØÍÆ¼öµÄ²Íµê
      */
@@ -144,9 +145,8 @@ public class IndexFragment extends BaseFragment {
             vGapLLP.bottomMargin = 3;
 
 
-
             View gapView = new View(getHostActivity());
-            gapView.setId(type.hashCode()+1);
+            gapView.setId(type.hashCode() + 1);
             gapView.setBackgroundColor(Color.parseColor("#dddedf"));
             recommendLayout.addView(gapView, vGapLLP);
 
