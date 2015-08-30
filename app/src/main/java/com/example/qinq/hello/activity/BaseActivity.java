@@ -10,18 +10,23 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewInjectUtils.inject(this);
+        ViewInjectUtils.instance().inject(this);
         initialize();
         addListener();
     }
 
     /**
-     * ³õÊ¼»¯
+     * åˆå§‹åŒ–
      */
     protected abstract void initialize();
 
     /**
-     * ¼àÌı
+     * åˆ·æ–°
+     */
+    protected abstract void refresh();
+
+    /**
+     * ç›‘å¬
      */
     protected abstract void addListener();
 

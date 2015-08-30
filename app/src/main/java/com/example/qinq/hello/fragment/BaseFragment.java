@@ -23,19 +23,15 @@ public abstract class BaseFragment extends Fragment {
             int contentViewLayoutId = contentView.value();
             rootView = inflater.inflate(contentViewLayoutId, container, false);
         }
-        ViewInjectUtils.inject(rootView);
+        initialize(rootView);
+        addListener();
         return rootView;
     }
 
+    protected abstract void initialize(View v);
 
-    /**
-     * ³õÊ¼»¯
-     */
-    protected abstract void initialize();
+    protected abstract void refresh();
 
-    /**
-     * ¼àÌý
-     */
     protected abstract void addListener();
 
 }

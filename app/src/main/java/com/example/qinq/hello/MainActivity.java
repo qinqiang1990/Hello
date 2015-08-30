@@ -91,6 +91,11 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     @Override
+    protected void refresh() {
+
+    }
+
+    @Override
     protected void addListener() {
         FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction().hide(shopFragment);
         transaction.hide(shopFragment);

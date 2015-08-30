@@ -2,5 +2,5 @@
 <resources>
     <color name="main_behind_bg">#fff0f0f0</color>
     <color name="text_color">#fff88602</color>
-
+    <color name="text_bg_color">#ff181818</color>
 </resources>

@@ -45,6 +45,11 @@ public class GuideActivity extends BaseActivity {
     }
 
     @Override
+    protected void refresh() {
+
+    }
+
+    @Override
     protected void addListener() {
 
 

@@ -1,6 +1,7 @@
 package com.example.qinq.hello.ioc;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,22 +23,29 @@ public class ViewInjectUtils {
 
     private static final String METHOD_FIND_VIEW_BY_ID = "findViewById";
 
+    public static ViewInjectUtils instance;
 
-    public static void inject(Object object) {
-        if (object instanceof Activity) {
-            injectContentView((Activity) object);
-        }
-        injectViews(object);
-        injectClick(object);
-
+    public static ViewInjectUtils instance() {
+        if (instance == null)
+            instance = new ViewInjectUtils();
+        return instance;
     }
 
     /**
-     * 注入主布局文件
-     *
+     * @param param(Field)
+     * @param object(view)
+     */
+    public void inject(Activity activity) {
+        injectContentView(activity);
+        injectViews(activity);
+        injectClick(activity);
+    }
+
+
+    /**
      * @param activity
      */
-    private static void injectContentView(Activity activity) {
+    private void injectContentView(Activity activity) {
         Class<? extends Activity> clazz = activity.getClass();
 
         ContentView contentView = clazz.getAnnotation(ContentView.class);
@@ -56,13 +64,11 @@ public class ViewInjectUtils {
     }
 
     /**
-     * 注入所有的控件
-     *
-     * @param object
+     * @param activity
      */
-    private static void injectViews(Object object) {
-        final Class clazz = object.getClass();
-        Field[] fields = clazz.getDeclaredFields();
+    private void injectViews(Activity activity) {
+        final Class<? extends Activity> clazz = activity.getClass();
+        Field[] fields = clazz.getClass().getDeclaredFields();
 
         for (Field field : fields) {
 
@@ -72,9 +78,9 @@ public class ViewInjectUtils {
                 if (ViewId != ViewInject.DEFAULT_ID) {
                     try {
                         Method method = clazz.getMethod(METHOD_FIND_VIEW_BY_ID, int.class);
-                        Object resView = method.invoke(object, ViewId);
+                        Object resView = method.invoke(clazz, ViewId);
                         field.setAccessible(true);
-                        field.set(object, resView);
+                        field.set(clazz, resView);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -89,13 +95,11 @@ public class ViewInjectUtils {
     }
 
     /**
-     * 注入click事件
-     *
-     * @param object
+     * @param activity
      */
-    private static void injectClick(final Object object) {
-        Class clazz = object.getClass();
-        Method[] methods = clazz.getDeclaredMethods();
+    private static void injectClick(final Activity activity) {
+        Class clazz = activity.getClass();
+        Method[] methods = activity.getClass().getDeclaredMethods();
 
         for (Method temp : methods) {
             final Method method = temp;
@@ -103,19 +107,14 @@ public class ViewInjectUtils {
             if (clickMethodAnnotation != null) {
                 int[] ViewIds = clickMethodAnnotation.id();
                 for (int i = 0; i < ViewIds.length; i++) {
-                    View view;
-                    if (object instanceof Activity) {
-                        view = ((Activity) object).findViewById(ViewIds[i]);
-                    } else {
-                        view = ((View) object).findViewById(ViewIds[i]);
-                    }
+                    View view = activity.findViewById(ViewIds[i]);
                     view.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View v) {
 
                             try {
-                                method.invoke(object, v);
+                                method.invoke(activity, v);
                             } catch (IllegalAccessException e) {
                                 e.printStackTrace();
                             } catch (InvocationTargetException e) {

@@ -6,15 +6,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.qinq.hello.R;
+import com.example.qinq.hello.ioc.view.ContentView;
 
 /**
  * Created by qinqiang on 2015/8/27.
  */
+
+@ContentView(R.layout.fragment_shop)
 public class ShopFragment extends BaseFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+    protected void initialize(View v) {
+
     }
 
+    @Override
+    protected void refresh() {
+
+    }
+
+    @Override
+    protected void addListener() {
+
+    }
 }

@@ -13,9 +13,6 @@ import java.lang.annotation.Target;
 public @interface ViewInject {
 
 
-    /**
-     * д╛хо©ь╪ЧID
-     */
     int DEFAULT_ID = -1;
 
 
