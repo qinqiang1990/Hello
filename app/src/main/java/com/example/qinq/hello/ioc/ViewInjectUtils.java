@@ -32,13 +32,11 @@ public class ViewInjectUtils {
     }
 
     /**
-     * @param param(Field)
-     * @param object(view)
+     * @param activity
      */
     public void inject(Activity activity) {
         injectContentView(activity);
         injectViews(activity);
-        injectClick(activity);
     }
 
 
@@ -52,9 +50,7 @@ public class ViewInjectUtils {
         if (contentView != null) {
             int contentViewLayoutId = contentView.value();
             try {
-
-                Method method = clazz.getMethod(METHOD_SET_CONTENTVIEW,
-                        int.class);
+                Method method = clazz.getMethod(METHOD_SET_CONTENTVIEW, int.class);
                 method.setAccessible(true);
                 method.invoke(activity, contentViewLayoutId);
             } catch (Exception e) {
@@ -86,43 +82,6 @@ public class ViewInjectUtils {
                         e.printStackTrace();
                     }
 
-                }
-
-            }
-
-        }
-
-    }
-
-    /**
-     * @param activity
-     */
-    private static void injectClick(final Activity activity) {
-        Class clazz = activity.getClass();
-        Method[] methods = activity.getClass().getDeclaredMethods();
-
-        for (Method temp : methods) {
-            final Method method = temp;
-            ClickMethod clickMethodAnnotation = method.getAnnotation(ClickMethod.class);
-            if (clickMethodAnnotation != null) {
-                int[] ViewIds = clickMethodAnnotation.id();
-                for (int i = 0; i < ViewIds.length; i++) {
-                    View view = activity.findViewById(ViewIds[i]);
-                    view.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-
-                            try {
-                                method.invoke(activity, v);
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    });
                 }
 
             }

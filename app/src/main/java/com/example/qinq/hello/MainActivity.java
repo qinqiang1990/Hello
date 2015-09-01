@@ -11,13 +11,11 @@ import com.example.qinq.hello.fragment.OrderFragment;
 import com.example.qinq.hello.fragment.PersonalFragment;
 import com.example.qinq.hello.fragment.PreferentialFragment;
 import com.example.qinq.hello.fragment.ShopFragment;
-import com.example.qinq.hello.ioc.view.ClickMethod;
 import com.example.qinq.hello.ioc.view.ContentView;
 import com.example.qinq.hello.ioc.view.ViewInject;
 
 @ContentView(R.layout.main)
 public class MainActivity extends BaseFragmentActivity {
-
 
     @ViewInject(value = R.id.main_tabHomeBtn)
     Button tabHomeBtn;
@@ -46,38 +44,39 @@ public class MainActivity extends BaseFragmentActivity {
 
     Fragment curfragment;
 
-    @ClickMethod(id = {R.id.main_tabHomeBtn, R.id.main_tabShopBtn, R.id.main_tabPreferentialBtn, R.id.main_tabOrderBtn, R.id.main_tabPersonalBtn})
-    public void click(View v) {
 
-        Fragment from = curfragment;
-        Fragment to = null;
-        switch (v.getId()) {
-            case R.id.main_tabHomeBtn:
-                to = curfragment = indexFragment;
+    View.OnClickListener click = new View.OnClickListener() {
 
-                break;
-            case R.id.main_tabShopBtn:
-                to = curfragment = shopFragment;
+        @Override
+        public void onClick(View v) {
 
-                break;
-            case R.id.main_tabPreferentialBtn:
-                to = curfragment = preferentialFragment;
+            Fragment from = curfragment;
+            Fragment to = null;
+            switch (v.getId()) {
+                case R.id.main_tabHomeBtn:
+                    to = curfragment = indexFragment;
 
-                break;
-            case R.id.main_tabOrderBtn:
-                to = curfragment = orderFragment;
+                    break;
+                case R.id.main_tabShopBtn:
+                    to = curfragment = shopFragment;
 
-                break;
-            case R.id.main_tabPersonalBtn:
-                to = curfragment = personalFragment;
+                    break;
+                case R.id.main_tabPreferentialBtn:
+                    to = curfragment = preferentialFragment;
 
-                break;
+                    break;
+                case R.id.main_tabOrderBtn:
+                    to = curfragment = orderFragment;
 
+                    break;
+                case R.id.main_tabPersonalBtn:
+                    to = curfragment = personalFragment;
+
+                    break;
+
+            }
         }
-
-        switchFragment(from, to);
-
-    }
+    };
 
 
     @Override
@@ -87,6 +86,7 @@ public class MainActivity extends BaseFragmentActivity {
         preferentialFragment = (PreferentialFragment) this.getSupportFragmentManager().findFragmentById(R.id.main_preferentialFragment);
         orderFragment = (OrderFragment) this.getSupportFragmentManager().findFragmentById(R.id.main_orderFragment);
         personalFragment = (PersonalFragment) this.getSupportFragmentManager().findFragmentById(R.id.main_personalFragment);
+
 
     }
 
@@ -104,6 +104,12 @@ public class MainActivity extends BaseFragmentActivity {
         transaction.hide(personalFragment);
         transaction.commit();
         curfragment = indexFragment;
+
+        tabHomeBtn.setOnClickListener(click);
+        tabShopBtn.setOnClickListener(click);
+        tabPreferentialBtn.setOnClickListener(click);
+        tabOrderBtn.setOnClickListener(click);
+        tabPersonalBtn.setOnClickListener(click);
     }
 
 

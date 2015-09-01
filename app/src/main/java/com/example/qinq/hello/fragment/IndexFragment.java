@@ -40,6 +40,9 @@ public class IndexFragment extends BaseFragment {
     private void loadRecommand() {
         View item = LayoutInflater.from(getActivity()).inflate(R.layout.index_recommend_item, null);
         recommendLayout.addView(item);
+
+
+
     }
 
 }

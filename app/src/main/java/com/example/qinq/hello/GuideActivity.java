@@ -28,7 +28,7 @@ public class GuideActivity extends BaseActivity {
 
     MainLoopImageAdapter adapter;
 
-    @ClickMethod(id = {R.id.guide_experienceBtn})
+
     public void onClick(View v) {
         stopAutoScroll();
     }
