@@ -52,17 +52,23 @@
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/textSize" />
 
-
-                <GridView
+                <com.example.qinq.hello.ui.gridview.MyGridView
                     android:id="@+id/brandGridView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:numColumns="3"></GridView>
+                    android:cacheColorHint="@android:color/transparent"
+                    android:horizontalSpacing="15dp"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="3"
+                    android:padding="10dp"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="10dp" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <Button
@@ -73,6 +79,25 @@
                     android:text="新菜推荐 "
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/textSize" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/newFoodLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp">
+
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
             </LinearLayout>
 
             <LinearLayout

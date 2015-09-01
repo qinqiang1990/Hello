@@ -1,18 +1,22 @@
 package com.example.qinq.hello.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.qinq.hello.R;
 import com.example.qinq.hello.ioc.data.GridViewAdapter;
 import com.example.qinq.hello.ioc.view.ContentView;
 import com.example.qinq.hello.ioc.view.ViewInject;
+import com.example.qinq.hello.ui.gridview.MyGridView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,16 +33,31 @@ import java.util.Map;
 @ContentView(R.layout.fragment_index)
 public class IndexFragment extends BaseFragment {
 
+    Context context;
     LinearLayout recommendLayout;
     GridView brandGridView;
+    LinearLayout newFoodLayout;
 
     @Override
     protected void initialize(View v) {
+        context = getActivity();
         recommendLayout = (LinearLayout) v.findViewById(R.id.recommendLayout);
+        newFoodLayout = (LinearLayout) v.findViewById(R.id.newFoodLayout);
         brandGridView = (GridView) v.findViewById(R.id.brandGridView);
         loadRecommand(3);
 
-        brandGridView.setAdapter(getData(10));
+        loadNewfood(8);
+        brandGridView.setAdapter(getData(9));
+
+        brandGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO Auto-generated method stub
+                Toast.makeText(context, String.valueOf(position), Toast.LENGTH_LONG).show();
+            }
+        });
+
 
     }
 
@@ -49,7 +68,7 @@ public class IndexFragment extends BaseFragment {
             map.put("text", String.valueOf(i));
             list.add(map);
         }
-        GridViewAdapter adapter = new GridViewAdapter(this.getActivity(), list);
+        GridViewAdapter adapter = new GridViewAdapter(context, list);
         return adapter;
     }
 
@@ -74,4 +93,13 @@ public class IndexFragment extends BaseFragment {
 
     }
 
+
+    private void loadNewfood(int count) {
+        for (int i = 0; i < count; i++) {
+            View item = LayoutInflater.from(getActivity()).inflate(R.layout.index_newfood_item, null);
+            ((TextView) item.findViewById(R.id.ini_foodNameView)).setText(String.valueOf(i));
+            newFoodLayout.addView(item);
+        }
+
+    }
 }

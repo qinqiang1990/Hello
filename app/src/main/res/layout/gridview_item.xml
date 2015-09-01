@@ -1,17 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/gridview_img"
-        android:layout_width="120dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:src="@mipmap/icon_accounts" />
 
     <TextView
         android:id="@+id/gridview_text"
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/gridview_img"
         android:gravity="center_horizontal"
@@ -19,8 +18,3 @@
         android:textSize="14dip" />
 
 </RelativeLayout>
-
-
-    http://blog.csdn.net/gchk125/article/details/7586401
-
-    http://blog.csdn.net/qq435757399/article/details/8008638
