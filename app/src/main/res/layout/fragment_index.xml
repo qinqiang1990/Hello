@@ -40,7 +40,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <Button
@@ -51,6 +51,13 @@
                     android:text="品牌餐店 "
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/textSize" />
+
+
+                <GridView
+                    android:id="@+id/brandGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"></GridView>
             </LinearLayout>
 
             <LinearLayout

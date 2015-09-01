@@ -18,13 +18,13 @@ import java.util.Map;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    private Context context;                        //运行上下文
-    private List<Map<String, Object>> listItems;    //信息集合
-    private LayoutInflater listContainer;           //视图容器
+    private Context context;
+    private List<Map<String, Object>> listItems;
+    private LayoutInflater listContainer;
 
     public ListViewAdapter(Context context, List<Map<String, Object>> listItems) {
         this.context = context;
-        listContainer = LayoutInflater.from(context);   //创建视图容器并设置上下文
+        listContainer = LayoutInflater.from(context);
         this.listItems = listItems;
     }
 
@@ -46,18 +46,14 @@ public class ListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView image = null;
-        //自定义视图
         if (convertView == null) {
-            //获取list_item布局文件的视图
             convertView = listContainer.inflate(R.layout.list_item, null);
-            //获取控件对象
             image = (ImageView) convertView.findViewById(R.id.imageItem);
-            //设置控件集到convertView
             convertView.setTag(image);
         } else {
             image = (ImageView) convertView.getTag();
         }
-        //设置文字和图片
+
         image.setImageResource((Integer) listItems.get(position).get("image"));
 
         final ImageView finalImage = image;
