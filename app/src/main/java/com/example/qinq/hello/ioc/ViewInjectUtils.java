@@ -19,10 +19,6 @@ import java.util.Objects;
  */
 public class ViewInjectUtils {
 
-    private static final String METHOD_SET_CONTENTVIEW = "setContentView";
-
-    private static final String METHOD_FIND_VIEW_BY_ID = "findViewById";
-
     public static ViewInjectUtils instance;
 
     public static ViewInjectUtils instance() {
@@ -50,9 +46,7 @@ public class ViewInjectUtils {
         if (contentView != null) {
             int contentViewLayoutId = contentView.value();
             try {
-                Method method = clazz.getMethod(METHOD_SET_CONTENTVIEW, int.class);
-                method.setAccessible(true);
-                method.invoke(activity, contentViewLayoutId);
+                activity.setContentView(contentViewLayoutId);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -64,7 +58,7 @@ public class ViewInjectUtils {
      */
     private void injectViews(Activity activity) {
         final Class<? extends Activity> clazz = activity.getClass();
-        Field[] fields = clazz.getClass().getDeclaredFields();
+        Field[] fields = clazz.getDeclaredFields();
 
         for (Field field : fields) {
 
@@ -73,11 +67,8 @@ public class ViewInjectUtils {
                 int ViewId = viewInjectAnnotation.value();
                 if (ViewId != ViewInject.DEFAULT_ID) {
                     try {
-                        Method method = clazz.getMethod(METHOD_FIND_VIEW_BY_ID, int.class);
-                        Object resView = method.invoke(clazz, ViewId);
                         field.setAccessible(true);
-                        field.set(clazz, resView);
-
+                        field.set(activity, activity.findViewById(ViewId));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

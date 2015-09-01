@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import com.example.qinq.hello.activity.BaseActivity;
 import com.example.qinq.hello.ioc.data.MainLoopImageAdapter;
-import com.example.qinq.hello.ioc.view.ClickMethod;
 import com.example.qinq.hello.ioc.view.ContentView;
 import com.example.qinq.hello.ioc.view.ViewInject;
 

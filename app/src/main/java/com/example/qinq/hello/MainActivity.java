@@ -75,7 +75,9 @@ public class MainActivity extends BaseFragmentActivity {
                     break;
 
             }
+            switchFragment(from, to);
         }
+
     };
 
 
