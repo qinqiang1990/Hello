@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class SwipeListViewAdapter extends BaseAdapter {
+public class ListViewAdapter extends BaseAdapter {
 
     private class ViewHolder {
 
@@ -51,7 +51,7 @@ public class SwipeListViewAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private float downX;
 
-    public SwipeListViewAdapter(Context context, List<String> data) {
+    public ListViewAdapter(Context context, List<String> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
@@ -94,30 +94,8 @@ public class SwipeListViewAdapter extends BaseAdapter {
 
         holder.tv.setText(getItem(position).toString());
 
-        final View finalConvertView = convertView;
-        convertView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        downX = event.getX();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        float distince = downX - event.getX();
-                        if (distince > 0) {
-                            Animation translateAnimation = new TranslateAnimation(0, 0, distince, 0);
-                            finalConvertView.startAnimation(translateAnimation);
-                        }
-                        break;
-
-                }
-                return false;
-            }
-        });
-
-                /*Animation animation = AnimationUtils.loadAnimation(v.getContext(), R.anim.scale);
+                /*
+                Animation animation = AnimationUtils.loadAnimation(v.getContext(), R.anim.scale);
                 v.startAnimation(animation);
 
                 ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(v, "alpha", 0f, 1f);
