@@ -1,14 +1,84 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.qinq.hello.ui.btn.SpinnerBtn
+            android:id="@+id/shop_spinner_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableRight="@drawable/spinner_btn"
+            android:text="排序"
+            android:textColor="@color/text_color" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/shop_line_color" />
+
+        <com.example.qinq.hello.ui.btn.ExpandListBtn
+            android:id="@+id/shop_expandListBtn_area"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableRight="@drawable/spinner_btn"
+            android:text="商圈"
+            android:textColor="@color/text_color" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/shop_line_color" />
+
+        <com.example.qinq.hello.ui.btn.SpinnerBtn
+            android:id="@+id/shop_spinner_cook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableRight="@drawable/spinner_btn"
+            android:text="菜系"
+            android:textColor="@color/text_color" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/shop_line_color" />
+
+        <com.example.qinq.hello.ui.btn.SpinnerBtn
+            android:id="@+id/shop_spinner_choose"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableRight="@drawable/spinner_btn"
+            android:text="包厢"
+            android:textColor="@color/text_color" />
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/shop_line_color" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
         android:text="餐店"
         android:textColor="@android:color/black"
         android:textSize="@dimen/titleSize" />
 
-</RelativeLayout>
+</LinearLayout>

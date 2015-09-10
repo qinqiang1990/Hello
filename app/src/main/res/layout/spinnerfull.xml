@@ -1,16 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:layout_height="wrap_content"
+    android:background="@drawable/pop_bg"
     android:orientation="vertical">
 
     <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/color_line" />
 
     <ListView
-        android:id="@+id/preferential_listView"
+        android:id="@+id/spinner_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/main_bg"
@@ -18,9 +20,9 @@
         android:divider="@color/divider_color"
         android:dividerHeight="1px"
         android:listSelector="@android:color/transparent"
+        android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:scrollbarStyle="outsideOverlay" />
-
 
 </LinearLayout>

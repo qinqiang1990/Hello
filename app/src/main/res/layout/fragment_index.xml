@@ -102,7 +102,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <Button
@@ -113,6 +113,19 @@
                     android:text="餐店优惠 "
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/textSize" />
+
+                <com.example.qinq.hello.ui.gridview.MyGridView
+                    android:id="@+id/shopGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:horizontalSpacing="15dp"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="2"
+                    android:padding="10dp"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="10dp" />
+
             </LinearLayout>
         </LinearLayout>
 

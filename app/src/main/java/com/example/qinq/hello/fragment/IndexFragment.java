@@ -37,6 +37,7 @@ public class IndexFragment extends BaseFragment {
     LinearLayout recommendLayout;
     GridView brandGridView;
     LinearLayout newFoodLayout;
+    GridView shopGridView;
 
     @Override
     protected void initialize(View v) {
@@ -44,9 +45,12 @@ public class IndexFragment extends BaseFragment {
         recommendLayout = (LinearLayout) v.findViewById(R.id.recommendLayout);
         newFoodLayout = (LinearLayout) v.findViewById(R.id.newFoodLayout);
         brandGridView = (GridView) v.findViewById(R.id.brandGridView);
+        shopGridView = (GridView) v.findViewById(R.id.shopGridView);
         loadRecommand(3);
 
         loadNewfood(8);
+        shopGridView.setAdapter(getData(9));
+
         brandGridView.setAdapter(getData(9));
 
         brandGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
