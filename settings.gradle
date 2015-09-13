@@ -1,1 +1,1 @@
-include ':app', ':common', ':qinq-library'
+include ':app', ':qinq-library', ':common'
