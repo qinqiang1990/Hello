@@ -4,6 +4,7 @@
     android:background="#FFFFFF">
 
     <TextView
+        android:id="@+id/order_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -11,4 +12,13 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/titleSize" />
 
+    <Button
+        android:id="@+id/order_sum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_desc"
+        android:background="@null"
+        android:text="Computer"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/titleSize" />
 </RelativeLayout>
