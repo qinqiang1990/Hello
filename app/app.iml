@@ -93,6 +93,7 @@
     <orderEntry type="library" exported="" name="com.android.volley-2015.05.28" level="project" />
     <orderEntry type="library" exported="" name="fastjson-1.2.7" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
+    <orderEntry type="module" module-name="qinq-library" exported="" />
     <orderEntry type="module" module-name="common" exported="" />
   </component>
 </module>
