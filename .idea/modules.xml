@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/qinq-library/qinq-library.iml" filepath="$PROJECT_DIR$/qinq-library/qinq-library.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipelistview/swipelistview.iml" filepath="$PROJECT_DIR$/swipelistview/swipelistview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipemenulistview/swipemenulistview.iml" filepath="$PROJECT_DIR$/swipemenulistview/swipemenulistview.iml" />
     </modules>
   </component>
 </project>

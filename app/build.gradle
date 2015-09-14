@@ -27,6 +27,7 @@ dependencies {
     compile project(':common')
     compile project(':qinq-library')
     compile project(':swipelistview')
+    compile project(':swipemenulistview')
 }
 
 tasks.withType(JavaCompile) {
