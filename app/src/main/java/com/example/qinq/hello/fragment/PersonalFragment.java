@@ -1,12 +1,16 @@
 package com.example.qinq.hello.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.qinq.hello.R;
+import com.example.qinq.hello.ioc.data.SwipeListViewAdapter;
 import com.example.qinq.hello.ioc.view.ContentView;
+import com.fortysevendeg.swipelistview.SwipeListView;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by qinqiang on 2015/8/27.
@@ -15,9 +19,15 @@ import com.example.qinq.hello.ioc.view.ContentView;
 @ContentView(R.layout.fragment_personal)
 public class PersonalFragment extends BaseFragment {
 
+    SwipeListView swipeListView;
+    Context context;
+    SwipeListViewAdapter swipeListViewAdapter;
+
     @Override
     protected void initialize(View v) {
-        
+        context = this.getActivity();
+        swipeListView = (SwipeListView) v.findViewById(R.id.personal_listView);
+
     }
 
     @Override
@@ -28,5 +38,11 @@ public class PersonalFragment extends BaseFragment {
     @Override
     protected void addListener() {
 
+        List<String> data = new ArrayList<String>();
+        for (int i = 0; i < 10; i++) {
+            data.add(String.valueOf(i));
+        }
+        swipeListViewAdapter = new SwipeListViewAdapter(context, data, swipeListView);
+        swipeListView.setAdapter(swipeListViewAdapter);
     }
 }

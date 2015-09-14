@@ -1,32 +1,34 @@
-package com.example.qinq.hello.ioc.data;
+package qinq.library;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.qinq.hello.R;
 
+import com.nineoldandroids.view.ViewHelper;
+import com.nineoldandroids.view.animation.AnimatorProxy;
+
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
-public class ListViewAdapter extends BaseAdapter {
+public class SwipeListViewAdapter extends BaseAdapter {
 
     private class ViewHolder {
 
         TextView tv = null;
+        Button btn = null;
+
+        Button front = null;
+        Button back = null;
 
         public TextView getTv() {
             return tv;
@@ -36,17 +38,30 @@ public class ListViewAdapter extends BaseAdapter {
             this.tv = tv;
         }
 
+        public Button getBtn() {
+            return btn;
+        }
 
+        public void setBtn(Button btn) {
+            this.btn = btn;
+        }
     }
+
 
     private Context context;
     private List<String> data;
     private LayoutInflater inflater;
+    private float downX;
+    /**
+     * 滑动速度检测类
+     */
+    private VelocityTracker mVelocityTracker;
 
-    public ListViewAdapter(Context context, List<String> data) {
+    public SwipeListViewAdapter(Context context, List<String> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
+
     }
 
     @Override
@@ -65,23 +80,64 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
 
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.list_item, null);
+            convertView = inflater.inflate(R.layout.qinq_swipe_list_item, null);
 
-            TextView tv = (TextView) convertView.findViewById(R.id.si_textView);
+            TextView tv = (TextView) convertView.findViewById(R.id.id_text);
+            Button del = (Button) convertView.findViewById(R.id.id_remove);
+
             holder.setTv(tv);
+            holder.setBtn(del);
             convertView.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
+
         holder.tv.setText(getItem(position).toString());
+
+        holder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.remove(position);
+                notifyDataSetChanged();
+            }
+        });
+
+        final View front = convertView.findViewById(R.id.id_front);
+        front.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        downX = event.getX();
+
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float deltaX = event.getX() - downX;
+
+                        TranslateAnimation animation = new TranslateAnimation(0.0f, deltaX, 0.0f, 0.0f);
+                        animation.setDuration(1000);
+                        animation.setFillAfter(true);
+
+                        front.startAnimation(animation);
+
+                        break;
+                }
+
+                return true;
+            }
+        });
 
                 /*
                 Animation animation = AnimationUtils.loadAnimation(v.getContext(), R.anim.scale);

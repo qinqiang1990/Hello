@@ -1,34 +1,81 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <View
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/color_line" />
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/preferential_refresh"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_line" />
+
+        <Button
+            android:id="@+id/preferential_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="refresh"
+            android:textColor="@color/text_color" />
+
+        <ListView
+            android:id="@+id/preferential_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/main_bg"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@color/divider_color"
+            android:dividerHeight="1px"
+            android:listSelector="@android:color/transparent"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:scrollbarStyle="outsideOverlay" />
+    </LinearLayout>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:textColor="@color/text_color"
-        android:text="refresh" />
+        android:layout_height="match_parent"
+        android:gravity="bottom">
 
-    <ListView
-        android:id="@+id/preferential_listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/main_bg"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@color/divider_color"
-        android:dividerHeight="1px"
-        android:listSelector="@android:color/transparent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:scrollbarStyle="outsideOverlay" />
+        <Button
+            android:id="@+id/nine_red"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/red"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/nine_blue"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/blue"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/nine_black"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/black"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/nine_green"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/green"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/nine_white"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/white" />
 
 
-</LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

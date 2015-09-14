@@ -1,32 +1,25 @@
 package com.example.qinq.hello.ioc.data;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.qinq.hello.R;
+import com.fortysevendeg.swipelistview.SwipeListView;
 
 import java.util.List;
-import java.util.Map;
 
 
-public class ListViewAdapter extends BaseAdapter {
+public class SwipeListViewAdapter extends BaseAdapter {
 
     private class ViewHolder {
 
         TextView tv = null;
+        Button btn = null;
 
         public TextView getTv() {
             return tv;
@@ -36,14 +29,23 @@ public class ListViewAdapter extends BaseAdapter {
             this.tv = tv;
         }
 
+        public Button getBtn() {
+            return btn;
+        }
 
+        public void setBtn(Button btn) {
+            this.btn = btn;
+        }
     }
 
+
+    private SwipeListView swipeListView;
     private Context context;
     private List<String> data;
     private LayoutInflater inflater;
 
-    public ListViewAdapter(Context context, List<String> data) {
+    public SwipeListViewAdapter(Context context, List<String> data, SwipeListView swipeListView) {
+        this.swipeListView = swipeListView;
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.data = data;
@@ -65,23 +67,40 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
 
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.list_item, null);
+            convertView = inflater.inflate(R.layout.qinq_swipe_list_item, null);
 
-            TextView tv = (TextView) convertView.findViewById(R.id.si_textView);
+            TextView tv = (TextView) convertView.findViewById(R.id.id_text);
+            Button del = (Button) convertView.findViewById(R.id.id_remove);
+
             holder.setTv(tv);
+            holder.setBtn(del);
             convertView.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
+
         holder.tv.setText(getItem(position).toString());
+
+        holder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.remove(position);
+                notifyDataSetChanged();
+                /**
+                 * 关闭SwipeListView
+                 * 不关闭的话，刚删除位置的item存在问题
+                 * 在监听事件中onListChange中关闭，会出现问题
+                 */
+                swipeListView.closeOpenedItems();
+            }
+        });
 
                 /*
                 Animation animation = AnimationUtils.loadAnimation(v.getContext(), R.anim.scale);
