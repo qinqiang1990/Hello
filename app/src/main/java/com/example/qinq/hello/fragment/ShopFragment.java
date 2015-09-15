@@ -36,6 +36,7 @@ public class ShopFragment extends BaseFragment {
 
     @Override
     protected void initialize(View v) {
+
         context = getActivity();
         spinnerBtn = (SpinnerBtn) v.findViewById(R.id.shop_spinner_order);
         spinnerBtn.setDataSource(getData(14));
