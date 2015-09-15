@@ -73,12 +73,18 @@
         android:layout_height="1dp"
         android:background="@color/shop_line_color" />
 
-    <TextView
+    <qinq.library.QinqSwipeListView
+        android:id="@+id/shop_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="餐店"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/titleSize" />
+        android:background="@color/main_bg"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@color/divider_color"
+        android:dividerHeight="1px"
+        android:listSelector="@android:color/transparent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:scrollbarStyle="outsideOverlay" />
+
 
 </LinearLayout>

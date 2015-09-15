@@ -10,12 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.qinq.hello.R;
+import com.example.qinq.hello.ioc.data.ListViewAdapter;
 import com.example.qinq.hello.ioc.view.ContentView;
 import com.example.qinq.hello.ui.btn.ExpandListBtn;
 import com.example.qinq.hello.ui.btn.SpinnerBtn;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import qinq.library.QinqSwipeListView;
 
 /**
  * Created by qinqiang on 2015/8/27.
@@ -28,6 +31,9 @@ public class ShopFragment extends BaseFragment {
     SpinnerBtn spinnerBtn;
     ExpandListBtn expandListBtn;
 
+    QinqSwipeListView qinqSwipeListView;
+    ListViewAdapter adapter;
+
     @Override
     protected void initialize(View v) {
         context = getActivity();
@@ -36,6 +42,11 @@ public class ShopFragment extends BaseFragment {
 
         expandListBtn = (ExpandListBtn) v.findViewById(R.id.shop_expandListBtn_area);
         expandListBtn.setDataSource(getData(15));
+
+
+        qinqSwipeListView = (QinqSwipeListView) v.findViewById(R.id.shop_listView);
+        adapter = new ListViewAdapter(context, getData(10));
+        qinqSwipeListView.setAdapter(adapter);
     }
 
     private List<String> getData(int count) {
@@ -67,5 +78,25 @@ public class ShopFragment extends BaseFragment {
                 Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
         });
+
+
+        qinqSwipeListView.setOnDismissCallback(new QinqSwipeListView.OnDismissCallback() {
+
+            @Override
+            public void onDismiss(int dismissPosition) {
+                adapter.getData().remove(dismissPosition);
+            }
+        });
+
+
+        qinqSwipeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(context, String.valueOf(adapter.getItem(position)), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

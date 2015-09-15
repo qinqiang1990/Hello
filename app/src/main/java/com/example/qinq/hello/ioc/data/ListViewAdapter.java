@@ -1,25 +1,15 @@
 package com.example.qinq.hello.ioc.data;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.qinq.hello.R;
 
 import java.util.List;
-import java.util.Map;
 
 
 public class ListViewAdapter extends BaseAdapter {
@@ -46,6 +36,14 @@ public class ListViewAdapter extends BaseAdapter {
     public ListViewAdapter(Context context, List<String> data) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
+        this.data = data;
+    }
+
+    public List<String> getData() {
+        return data;
+    }
+
+    public void setData(List<String> data) {
         this.data = data;
     }
 
