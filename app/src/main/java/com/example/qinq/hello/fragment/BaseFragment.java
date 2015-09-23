@@ -6,13 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.qinq.hello.ioc.ViewInjectUtils;
 import com.example.qinq.hello.ioc.view.ContentView;
 
 /**
  * Created by qinqiang on 2015/8/27.
  */
 public abstract class BaseFragment extends Fragment {
+
+    protected View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -23,15 +24,22 @@ public abstract class BaseFragment extends Fragment {
             int contentViewLayoutId = contentView.value();
             rootView = inflater.inflate(contentViewLayoutId, container, false);
         }
-        initialize(rootView);
+        this.rootView = rootView;
+        initialize();
         addListener();
         return rootView;
     }
 
-    protected abstract void initialize(View v);
+    protected abstract void initialize();
 
     protected abstract void refresh();
 
     protected abstract void addListener();
+
+    public void initNavBar(NavigateBar navBar) {
+    }
+
+    public void setTitle(String title) {
+    }
 
 }

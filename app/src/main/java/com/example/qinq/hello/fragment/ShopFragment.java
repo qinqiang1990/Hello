@@ -35,17 +35,22 @@ public class ShopFragment extends BaseFragment {
     ListViewAdapter adapter;
 
     @Override
-    protected void initialize(View v) {
+    public void initNavBar(NavigateBar navBar) {
+        navBar.setTitle("餐店");
+        super.initNavBar(navBar);
+    }
+
+    @Override
+    protected void initialize() {
 
         context = getActivity();
-        spinnerBtn = (SpinnerBtn) v.findViewById(R.id.shop_spinner_order);
+        spinnerBtn = (SpinnerBtn) rootView.findViewById(R.id.shop_spinner_order);
         spinnerBtn.setDataSource(getData(14));
 
-        expandListBtn = (ExpandListBtn) v.findViewById(R.id.shop_expandListBtn_area);
+        expandListBtn = (ExpandListBtn) rootView.findViewById(R.id.shop_expandListBtn_area);
         expandListBtn.setDataSource(getData(15));
 
-
-        qinqSwipeListView = (QinqSwipeListView) v.findViewById(R.id.shop_listView);
+        qinqSwipeListView = (QinqSwipeListView) rootView.findViewById(R.id.shop_listView);
         adapter = new ListViewAdapter(context, getData(10));
         qinqSwipeListView.setAdapter(adapter);
     }
@@ -70,6 +75,7 @@ public class ShopFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
+
         });
 
         expandListBtn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,6 +84,7 @@ public class ShopFragment extends BaseFragment {
 
                 Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
+
         });
 
 
@@ -87,6 +94,7 @@ public class ShopFragment extends BaseFragment {
             public void onDismiss(int dismissPosition) {
                 adapter.getData().remove(dismissPosition);
             }
+
         });
 
 
@@ -97,6 +105,7 @@ public class ShopFragment extends BaseFragment {
 
                 Toast.makeText(context, String.valueOf(adapter.getItem(position)), Toast.LENGTH_SHORT).show();
             }
+
         });
 
     }

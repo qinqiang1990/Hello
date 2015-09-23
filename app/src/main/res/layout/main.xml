@@ -90,11 +90,11 @@
             tools:layout="@layout/fragment_shop" />
 
         <fragment
-            android:id="@+id/main_indexFragment"
-            class="com.example.qinq.hello.fragment.IndexFragment"
+            android:id="@+id/main_homeFragment"
+            class="com.example.qinq.hello.fragment.HomeFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_index" />
+            tools:layout="@layout/fragment_home" />
 
 
     </RelativeLayout>

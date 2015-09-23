@@ -1,11 +1,8 @@
 package com.example.qinq.hello.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -15,23 +12,18 @@ import android.widget.Toast;
 import com.example.qinq.hello.R;
 import com.example.qinq.hello.ioc.data.GridViewAdapter;
 import com.example.qinq.hello.ioc.view.ContentView;
-import com.example.qinq.hello.ioc.view.ViewInject;
-import com.example.qinq.hello.ui.gridview.MyGridView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 /**
  * Created by qinqiang on 2015/8/27.
  */
 
-@ContentView(R.layout.fragment_index)
-public class IndexFragment extends BaseFragment {
+@ContentView(R.layout.fragment_home)
+public class HomeFragment extends BaseFragment {
 
     Context context;
     LinearLayout recommendLayout;
@@ -40,12 +32,18 @@ public class IndexFragment extends BaseFragment {
     GridView shopGridView;
 
     @Override
-    protected void initialize(View v) {
+    public void initNavBar(NavigateBar navBar) {
+        navBar.setTitle("首页");
+        super.initNavBar(navBar);
+    }
+
+    @Override
+    protected void initialize() {
         context = getActivity();
-        recommendLayout = (LinearLayout) v.findViewById(R.id.recommendLayout);
-        newFoodLayout = (LinearLayout) v.findViewById(R.id.newFoodLayout);
-        brandGridView = (GridView) v.findViewById(R.id.brandGridView);
-        shopGridView = (GridView) v.findViewById(R.id.shopGridView);
+        recommendLayout = (LinearLayout) rootView.findViewById(R.id.recommendLayout);
+        newFoodLayout = (LinearLayout) rootView.findViewById(R.id.newFoodLayout);
+        brandGridView = (GridView) rootView.findViewById(R.id.brandGridView);
+        shopGridView = (GridView) rootView.findViewById(R.id.shopGridView);
         loadRecommand(3);
 
         loadNewfood(8);

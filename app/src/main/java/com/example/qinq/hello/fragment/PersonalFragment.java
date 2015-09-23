@@ -1,7 +1,9 @@
 package com.example.qinq.hello.fragment;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.qinq.hello.R;
 import com.example.qinq.hello.ioc.data.SwipeListViewAdapter;
@@ -11,6 +13,11 @@ import com.fortysevendeg.swipelistview.SwipeListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 /**
  * Created by qinqiang on 2015/8/27.
@@ -24,11 +31,18 @@ public class PersonalFragment extends BaseFragment {
     SwipeListViewAdapter swipeListViewAdapter;
 
     @Override
-    protected void initialize(View v) {
-        context = this.getActivity();
-        swipeListView = (SwipeListView) v.findViewById(R.id.personal_listView);
-
+    public void initNavBar(NavigateBar navBar) {
+        navBar.setTitle("个人");
+        super.initNavBar(navBar);
     }
+
+
+    @Override
+    protected void initialize() {
+        context = this.getActivity();
+        swipeListView = (SwipeListView) rootView.findViewById(R.id.personal_listView);
+    }
+
 
     @Override
     protected void refresh() {

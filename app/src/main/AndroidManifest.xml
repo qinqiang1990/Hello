@@ -17,8 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="qinq.library.MainActivity" />
-
+        <activity android:name="com.baoyz.swipemenulistview.demo.MainActivity" />
 
         <activity android:name="com.baoyz.swipemenulistview.demo.SimpleActivity" />
 

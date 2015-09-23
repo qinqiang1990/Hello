@@ -2,5 +2,6 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="textSize">16sp</dimen>
     <dimen name="titleSize">20sp</dimen>
+    <dimen name="titleSmallSize">16sp</dimen>
     <dimen name="textBgSize">20sp</dimen>
 </resources>

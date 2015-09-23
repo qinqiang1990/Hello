@@ -28,6 +28,7 @@ dependencies {
     compile project(':qinq-library')
     compile project(':swipelistview')
     compile project(':swipemenulistview')
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
 }
 
 tasks.withType(JavaCompile) {

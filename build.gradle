@@ -1,9 +1,19 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+
+    repositories {
+        mavenLocal()
+    }
+
     repositories {
         jcenter()
     }
+
+    repositories {
+        mavenCentral()
+    }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
 
@@ -13,26 +23,17 @@ buildscript {
 }
 
 allprojects {
+
     repositories {
-
         mavenLocal()
+    }
 
-        maven {
-            url "http://repository.sonatype.org/content/groups/public/"
-        }
-        maven {
-            url "http://repository.jboss.com/maven2/"
-        }
-        maven {
-            url "http://maven.oschina.net/content/groups/public/"
-        }
-
-        maven {
-            url "http://clinker.47deg.com/nexus/content/groups/public"
-        }
-
-
+    repositories {
         jcenter()
+    }
+
+    repositories {
+        mavenCentral()
     }
 
 }

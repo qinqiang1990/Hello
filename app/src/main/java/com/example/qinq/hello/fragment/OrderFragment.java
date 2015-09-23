@@ -2,19 +2,16 @@ package com.example.qinq.hello.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.demo.MainActivity;
 import com.example.qinq.hello.R;
 import com.example.qinq.hello.ioc.view.ContentView;
 
+import de.greenrobot.event.EventBus;
 import qinq.IAlgorithm;
 import qinq.impl.Algorithm;
-import qinq.library.MainActivity;
 
 /**
  * Created by qinqiang on 2015/8/27.
@@ -29,12 +26,25 @@ public class OrderFragment extends BaseFragment {
     Context context;
 
     @Override
-    protected void initialize(View v) {
+    public void initNavBar(NavigateBar navBar) {
+        navBar.setTitle("订单");
+        navBar.addBackBtn(v -> {
+            // TODO Auto-generated method stub
+            EventBus.getDefault().post("HOME");
+        });
+        navBar.addSwitchIndicatorView("未消费", "已消费");
+
+        super.initNavBar(navBar);
+    }
+
+    @Override
+    protected void initialize() {
         context = this.getActivity();
         algorithm = new Algorithm();
-        sum = (Button) v.findViewById(R.id.order_sum);
-        tv = (TextView) v.findViewById(R.id.order_desc);
+        sum = (Button) rootView.findViewById(R.id.order_sum);
+        tv = (TextView) rootView.findViewById(R.id.order_desc);
     }
+
 
     @Override
     protected void refresh() {
@@ -44,16 +54,13 @@ public class OrderFragment extends BaseFragment {
     @Override
     protected void addListener() {
 
-        sum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        sum.setOnClickListener(v -> {
 
-                tv.setText(String.valueOf(algorithm.plus(15f, 20f)));
+            tv.setText(String.valueOf(algorithm.plus(15f, 20f)));
 
-                Intent intent = new Intent(context, MainActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
 
-            }
         });
 
     }

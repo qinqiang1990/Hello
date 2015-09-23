@@ -66,25 +66,32 @@ public class PreferentialFragment extends BaseFragment {
     private Button refresh, white, black, blue, red;
     private boolean isShow = false;
 
-    @Override
 
-    protected void initialize(View v) {
+    @Override
+    public void initNavBar(NavigateBar navBar) {
+        navBar.setTitle("优惠");
+        super.initNavBar(navBar);
+    }
+
+
+    @Override
+    protected void initialize() {
         context = getActivity();
 
         mRequestQueue = Volley.newRequestQueue(context);
 
-        listView = (ListView) v.findViewById(R.id.preferential_listView);
+        listView = (ListView) rootView.findViewById(R.id.preferential_listView);
 
-        swipeMenuListView = (SwipeMenuListView) v.findViewById(R.id.preferential_swipe_listView);
-
-
-        refresh = (Button) v.findViewById(R.id.preferential_refresh);
+        swipeMenuListView = (SwipeMenuListView) rootView.findViewById(R.id.preferential_swipe_listView);
 
 
-        white = (Button) v.findViewById(R.id.nine_white);
-        red = (Button) v.findViewById(R.id.nine_red);
-        blue = (Button) v.findViewById(R.id.nine_blue);
-        black = (Button) v.findViewById(R.id.nine_black);
+        refresh = (Button) rootView.findViewById(R.id.preferential_refresh);
+
+
+        white = (Button) rootView.findViewById(R.id.nine_white);
+        red = (Button) rootView.findViewById(R.id.nine_red);
+        blue = (Button) rootView.findViewById(R.id.nine_blue);
+        black = (Button) rootView.findViewById(R.id.nine_black);
 
         mAppList = context.getPackageManager().getInstalledApplications(0);
         mAdapter = new AppAdapter();
