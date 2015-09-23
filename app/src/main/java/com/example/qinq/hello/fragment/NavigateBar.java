@@ -25,8 +25,9 @@ public class NavigateBar extends BaseFragment implements View.OnClickListener {
     private TextView tv;
 
     private Button leftIndicatorBtn;
-
     private Button rightIndicatorBtn;
+
+    private ImageButton backIndicatorBtn;
 
     @Override
     protected void initialize() {
@@ -36,27 +37,41 @@ public class NavigateBar extends BaseFragment implements View.OnClickListener {
 
     public void addBackBtn(View.OnClickListener listener) {
 
+        if (listener == null) {
+            if (backIndicatorBtn != null) {
+                backIndicatorBtn.setVisibility(View.INVISIBLE);
+            }
+            return;
+        }
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.navigate_back, null);
-        ImageButton backIndicatorBtn = (ImageButton) view.findViewById(R.id.nav_indicator_back);
+        backIndicatorBtn = (ImageButton) view.findViewById(R.id.nav_indicator_back);
         backIndicatorBtn.setOnClickListener(listener);
 
         ((ViewGroup) rootView).addView(view);
-
-/*      Application app = getActivity().getApplication();
-        getActivity().finish();*/
 
     }
 
     public void setTitle(String title) {
         tv.setText(title);
+        addBackBtn(null);
+        addSwitchIndicatorView(null, null);
     }
 
     public void addSwitchIndicatorView(String leftText, String rightText) {
-        View indicatorView = LayoutInflater.from(getActivity()).inflate(R.layout.nav_switch_indicator, null);
-        leftIndicatorBtn = (Button) indicatorView
-                .findViewById(R.id.nav_indicator_leftBtn);
-        rightIndicatorBtn = (Button) indicatorView
-                .findViewById(R.id.nav_indicator_rightBtn);
+
+        if (leftText == null && rightText == null) {
+            if (rightIndicatorBtn != null) {
+                rightIndicatorBtn.setVisibility(View.INVISIBLE);
+            }
+            if (leftIndicatorBtn != null) {
+                leftIndicatorBtn.setVisibility(View.INVISIBLE);
+            }
+            return;
+        }
+
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.nav_switch_indicator, null);
+        leftIndicatorBtn = (Button) view.findViewById(R.id.nav_indicator_leftBtn);
+        rightIndicatorBtn = (Button) view.findViewById(R.id.nav_indicator_rightBtn);
         leftIndicatorBtn.setText(leftText);
         rightIndicatorBtn.setText(rightText);
         leftIndicatorBtn.setSelected(true);
@@ -70,7 +85,7 @@ public class NavigateBar extends BaseFragment implements View.OnClickListener {
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         rlp.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        ((ViewGroup) rootView).addView(indicatorView, rlp);
+        ((ViewGroup) rootView).addView(view, rlp);
 
     }
 

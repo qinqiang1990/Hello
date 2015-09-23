@@ -2,6 +2,7 @@ package com.example.qinq.hello.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,9 +29,11 @@ public class OrderFragment extends BaseFragment {
     @Override
     public void initNavBar(NavigateBar navBar) {
         navBar.setTitle("订单");
-        navBar.addBackBtn(v -> {
-            // TODO Auto-generated method stub
-            EventBus.getDefault().post("HOME");
+        navBar.addBackBtn(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post("HOME");
+            }
         });
         navBar.addSwitchIndicatorView("未消费", "已消费");
 
@@ -54,13 +57,15 @@ public class OrderFragment extends BaseFragment {
     @Override
     protected void addListener() {
 
-        sum.setOnClickListener(v -> {
+        sum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText(String.valueOf(algorithm.plus(15f, 20f)));
 
-            tv.setText(String.valueOf(algorithm.plus(15f, 20f)));
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
 
-            Intent intent = new Intent(context, MainActivity.class);
-            startActivity(intent);
-
+            }
         });
 
     }
